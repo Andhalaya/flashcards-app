@@ -1,37 +1,37 @@
 import React from 'react';
 
-export default function SideBar({ filters, showAll, onFilterChange, onRandomize }) {
+export default function SideBar({onGroupChange}) {
     return (
         <div className='sideBar'>
-            <h3>Select a group</h3>
-            <label>
-                <input
-                    type='checkbox'
-                    checked={filters.hiragana}
-                    onChange={() => onFilterChange('hiragana')}
+            <h3>Hiragana</h3>
+            <label> 
+                <input 
+                type="radio"
+                checked={selectedGroup === 'hiragana'}
+                onChange={() => onGroupChange('hiragana')}
                 />
-                Hiragana
+                All symbols
             </label>
-            <label>
-                <input
-                    type='checkbox'
-                    checked={filters.katakana}
-                    onChange={() => onFilterChange('katakana')}
-                />
-                Katakana
+            <label> 
+                <input type="radio" />
+                K-group
             </label>
-            <label>
-                <input
-                    type='checkbox'
-                    checked={filters.kanji}
-                    onChange={() => onFilterChange('kanji')}
-                />
-                Kanji
+            <label> 
+                <input type="radio" />
+                T-group
             </label>
-            <div style={{ display: 'flex', gap: '20px' }}>
-                <button onClick={showAll}>Show all</button>
-                <button onClick={onRandomize}>Randomize</button>
-            </div>
+            <label> 
+                <input type="radio" />
+                R-group
+            </label>
+            <label> 
+                <input type="radio" />
+                S-group
+            </label>
+            <label> 
+                <input type="radio" />
+                T-group
+            </label>
 
         </div>
     );

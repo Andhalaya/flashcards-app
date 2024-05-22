@@ -25,6 +25,14 @@
 .topBar{
   background-color: #acabab;
   width: 100%;
+  top: 0;
+}
+
+.topBar ul{
+  margin: 0;
+  list-style: none;
+  display: flex;
+  gap: 20px;
 }
 
 .flip-card {

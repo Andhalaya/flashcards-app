@@ -5,14 +5,6 @@ export default function SideBar({onGroupChange}) {
         <div className='sideBar'>
             <h3>Hiragana</h3>
             <label> 
-                <input 
-                type="radio"
-                checked={selectedGroup === 'hiragana'}
-                onChange={() => onGroupChange('hiragana')}
-                />
-                All symbols
-            </label>
-            <label> 
                 <input type="radio" />
                 K-group
             </label>

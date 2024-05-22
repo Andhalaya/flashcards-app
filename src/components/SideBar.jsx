@@ -6,7 +6,11 @@ export default function SideBar({ selectedGroup, onGroupChange }) {
 
     return (
         <div className='sideBar'>
-            <h3>Hiragana</h3>
+            <h3>Filter By</h3>
+            <label>
+                <input type="radio" value="all" checked={selectedGroup === 'all'} onChange={handleChange} />
+                All
+            </label>
             <label>
                 <input type="radio" value="k" checked={selectedGroup === 'k'} onChange={handleChange} />
                 K-group
@@ -23,6 +27,18 @@ export default function SideBar({ selectedGroup, onGroupChange }) {
                 <input type="radio" value="s" checked={selectedGroup === 's'} onChange={handleChange} />
                 S-group
             </label>
+            <p>Select a number of cards:</p>
+            <div style={{display:'flex', gap:'20px'}}>
+                
+             <select name="" id="">
+                <option value="">5</option>
+                <option value="">10</option>
+                <option value="">15</option>
+                <option value="">20</option>
+            </select>
+            <button>Random</button>   
+            </div>
+            
         </div>
     );
 }

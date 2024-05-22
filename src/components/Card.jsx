@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function Card({ symbol, meaning }) {
+export default function Card({ symbol, meaning, isMemorized, onToggleMemorized,  isAddedToPractice }) {
   const [flipped, setFlipped] = useState(false);
 
   const handleFlip = () => {
@@ -8,11 +8,21 @@ export default function Card({ symbol, meaning }) {
   };
 
   return (
-    <div className='flip-card' onClick={handleFlip}>
-      <div className={`flip-card-inner ${flipped ? 'flipped' : ''}`}>
-        <div className='front'>{symbol}</div>
-        <div className='back'>{meaning}</div>
+    <div className='card-container'>
+    {isAddedToPractice ? '' :
+      <button className='add-btn' onClick={() => onToggleMemorized(symbol)}>
+        {isMemorized ? 'X' : '+'}
+      </button>
+    }
+      <div className='flip-card' onClick={handleFlip}>
+        <div className={`flip-card-inner ${flipped ? 'flipped' : ''}`}>
+          <div className={`front ${isAddedToPractice ? 'card-added-to-practice' : ''}`}>{symbol}</div>
+          <div className='back'>{meaning}</div>
+        </div>
       </div>
     </div>
+
   );
 }
+
+

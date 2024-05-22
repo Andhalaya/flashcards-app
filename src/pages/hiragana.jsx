@@ -45,7 +45,7 @@ export default function Hiragana() {
 
     const toggleMemorized = (symbol) => {
         setMemorizedCards((prev) => {
-            const newMemorizedCards = prev.includes(symbol) 
+            const newMemorizedCards = prev.includes(symbol)
                 ? prev.filter(item => item !== symbol)
                 : [...prev, symbol];
 
@@ -68,22 +68,22 @@ export default function Hiragana() {
                     <h3>Need to practice:</h3>
                     <div className='cards'>
                         {needToPracticeCards.map((card, index) => (
-                            <Card 
-                                key={index} 
-                                symbol={card.kata} 
-                                meaning={card.romaji} 
-                                isMemorized={true} 
+                            <Card
+                                key={index}
+                                symbol={card.kata}
+                                meaning={card.romaji}
+                                isMemorized={true}
                                 onToggleMemorized={() => toggleMemorized(card.kata)}
                             />
                         ))}
                     </div>
                     <h3>Study Cards:</h3>
                     <div className='cards'>
-                    {cards.map((card, index) => (
-                            <Card 
-                                key={index} 
-                                symbol={card.kata} 
-                                meaning={card.romaji} 
+                        {cards.map((card, index) => (
+                            <Card
+                                key={index}
+                                symbol={card.kata}
+                                meaning={card.romaji}
                                 isMemorized={memorizedCards.includes(card.kata)}
                                 onToggleMemorized={toggleMemorized}
                                 isAddedToPractice={needToPracticeCards.some(item => item.kata === card.kata)}

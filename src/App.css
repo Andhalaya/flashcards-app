@@ -1,21 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap');
 
-.main{
+.main {
   display: flex;
 }
 
-.content{
+.content {
   padding: 20px;
-  flex: 70%;
+  flex: 80%;
 }
 
-.cards{
+.cards {
   display: flex;
-  gap: 30px;
+  gap: 50px;
   flex-wrap: wrap;
   font-family: "Noto Sans JP", sans-serif;
   font-weight: 600;
   font-size: 30px;
+  padding: 20px;
 }
 
 .card-added-to-practice {
@@ -24,21 +25,21 @@
   border-radius: 20px;
 }
 
-.card-container{
+.card-container {
   display: flex;
   flex-direction: column;
 }
 
-.sideBar{
+.sideBar {
   background-color: #4d4d4d;
   bottom: 0;
   padding: 20px;
-  flex: 30%;
+  flex: 20%;
   display: flex;
   flex-direction: column;
 }
 
-.topBar{
+.topBar {
   background-color: #acabab;
   width: 100%;
   top: 0;
@@ -47,7 +48,7 @@
   align-items: center;
 }
 
-.topBar ul{
+.topBar ul {
   margin: 0;
   list-style: none;
   display: flex;
@@ -55,25 +56,22 @@
 }
 
 .flip-card {
-  width: 100px;
-  height: 100px;
-  perspective: 1000px; 
+  width: 150px;
+  height: 150px;
+  perspective: 1000px;
   cursor: pointer;
   transition: transform 0.3s;
+  position: relative;
 }
 
 .flip-card:hover {
   transform: scale(0.9);
 }
 
-.flip-card:hover .flip-card-inner {
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.749);
-}
-
 .flip-card-inner {
   position: relative;
   width: 100%;
-  height: 100%; 
+  height: 100%;
   transition: transform 0.3s;
   transform-style: preserve-3d;
   background-color: rgb(145, 109, 178);
@@ -84,7 +82,8 @@
   transform: rotateY(180deg) scale(1);
 }
 
-.front, .back {
+.front,
+.back {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -101,11 +100,37 @@
   border-radius: 20px;
 }
 
-.add-btn{
-  background-color: rgba(0, 174, 255, 0.76);
-  border: none;
+.add-btn {
+  display: flex;
+  background-color: transparent;
+  border: 1px solid white;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
   border-radius: 30px;
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   cursor: pointer;
+  position: absolute;
+  z-index: 1;
+  margin-left: 130px;
+  margin-top: -5px;
+}
+
+.add,
+.remove {
+  width: 25px;
+  height: 25px;
+  border-radius: 30px;
+  align-content: center;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.add {
+  background-color: rgba(0, 174, 255, 0.506);
+}
+
+.remove {
+  background-color: rgba(255, 255, 255, 0.277);
 }

@@ -7,27 +7,37 @@ import axios from 'axios';
 export default function Hiragana() {
 
     const [cards, setCards] = useState([]);
-    const [selectedGroup, setSelectedGroup] = useState('hiragana');
+    const [selectedGroup, setSelectedGroup] = useState('All');
 
     useEffect(() => {
-        fetchCards();
-    }, []);
+        fetchCards(selectedGroup);
+    }, [selectedGroup]);
 
-    const fetchCards = async () => {
+    const fetchCards = async (group) => {
         try {
-            const res = await axios.get(`http://localhost:8080/hiragana`);
-            setCards(res.data);
+            if(group === 'All') {
+                const res = await axios.get('http://localhost:8080/hiragana')
+                setCards(res.data); 
+            } else {
+               const res = await axios.get('http://localhost:8080/hiragana/group', {
+                    params: { group }
+                });
+                setCards(res.data); 
+            }
+           
         } catch (error) {
             console.error('Error fetching data:', error);
         }
     };
 
+    const handleGroupChange = (group) => {
+        setSelectedGroup(group);
+    };
+
     return (
-        <div >
+        <div>
             <div className='main'>
-                <SideBar
-                    selectedGroup={selectedGroup}
-                />
+                <SideBar selectedGroup={selectedGroup} onGroupChange={handleGroupChange} />
                 <div className='content'>
                     <div className='cards'>
                         {cards.map((card, index) => (

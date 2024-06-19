@@ -3,6 +3,7 @@ import Home from './pages/Home';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import TopBar from './components/TopBar';
+import MyCards from './pages/myCards';
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/hiragana' element={<Hiragana />} />
+          <Route path='/myCards' element={<MyCards />} />
         </Routes>
       </div>
 

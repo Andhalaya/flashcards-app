@@ -1,21 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function TopBar({  }) {
+export default function TopBar({ }) {
   return (
     <div className='topBar'>
       <ul>
-      <li>
-            <Link to='/'>home</Link>
+        <li>
+          <Link to='/'>HOME</Link>
         </li>
         <li>
-            <Link to='/hiragana'>hiragana</Link>
+            <Link to='/myCards'>MY CARDS</Link>
         </li>
         <li>
-            <Link to='/katakana'>katakana</Link>
+          <Link to='/hiragana'>HIRAGANA</Link>
         </li>
         <li>
-            <Link to='/kanji'>kanji</Link>
+          <Link to='/katakana'>KATAKANA</Link>
+        </li>
+        <li>
+          <Link to='/kanji'>KANJI</Link>
         </li>
       </ul>
     </div>

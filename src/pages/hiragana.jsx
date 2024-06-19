@@ -7,9 +7,11 @@ export default function Hiragana() {
 
     const [cards, setCards] = useState([]);
     const [selectedGroup, setSelectedGroup] = useState('all');
+    const [addedCards, setAddedCards] = useState([]);
 
     useEffect(() => {
         fetchCards(selectedGroup);
+        fetchSavedCards();
     }, [selectedGroup]);
 
 
@@ -30,8 +32,34 @@ export default function Hiragana() {
         }
     };
 
+    const fetchSavedCards = async () => {
+        try {
+            const res = await axios.get('http://localhost:8080/myCards');
+            console.log(res.data)
+            setAddedCards(res.data.map(card => card.symbol)); 
+        } catch (error) {
+            console.error('Error fetching saved flashcards:', error);
+        }
+    };
+
     const handleGroupChange = (group) => {
         setSelectedGroup(group);
+    };
+
+    const handleAddCard = async (symbol, meaning) => {
+        try {
+            const isAlreadySaved = addedCards.includes(symbol);
+            if (!isAlreadySaved) {
+                await axios.post('http://localhost:8080/myCards/new', {
+                    symbol,
+                    meaning
+                });
+
+                setAddedCards([...addedCards, symbol]);
+            }
+        } catch (error) {
+            console.error('Error adding card:', error);
+        }
     };
 
     return (
@@ -46,6 +74,8 @@ export default function Hiragana() {
                                 key={index}
                                 symbol={card.kata}
                                 meaning={card.romaji}
+                                isAdded={addedCards.includes(card.kata)}
+                                onToggleAdd={() => handleAddCard(card.kata, card.romaji)}
                             />
                         ))}
                     </div>

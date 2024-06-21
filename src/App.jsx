@@ -3,10 +3,11 @@ import { AuthProvider } from './context/AuthContext.jsx';
 
 import './App.css';
 import Home from './pages/Home.jsx';
-import Hiragana from './pages/hiragana';
+import Hiragana from './pages/hiragana.jsx'
 import TopBar from './components/TopBar';
 import MyCards from './pages/myCards';
 import LoginPage from './pages/Login/index.jsx';
+
 
 
 export default function App() {

@@ -7,7 +7,7 @@ export default function Hiragana() {
     const [cards, setCards] = useState([]);
     const [selectedGroup, setSelectedGroup] = useState('all');
     const [addedCards, setAddedCards] = useState([]);
-
+    
     useEffect(() => {
         fetchCards(selectedGroup);
         fetchSavedCards();

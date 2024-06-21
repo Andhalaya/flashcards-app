@@ -12,7 +12,7 @@ const basicForm = {
 export default function Form() {
     // MARÍA REMINDER: look up new FormData()
     const [formData, setFormData] = useState(basicForm)
-    const { register, login } = useAuth()
+    const { register, login, isLogged, currentUser, userData } = useAuth()
 
     const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value })
 
@@ -21,7 +21,10 @@ export default function Form() {
         const { userName, email, password } = formData
 
         // Testing OK
-        await register(userName, email, password)
+        // await register(userName, email, password)
+
+        // Testing
+        await login(email, password)  
     }
 
     return (<>

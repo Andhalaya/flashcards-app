@@ -13,16 +13,21 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.app{
+.app {
   width: 100vw;
 }
 
-a{
+a {
   text-decoration: none;
   color: white;
 }
 
-
+button {
+  cursor: pointer;
+  background-color: transparent;
+  border-color: transparent;
+  padding: 0px;
+}
 
 body {
   margin: 0;

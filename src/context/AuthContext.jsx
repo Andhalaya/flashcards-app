@@ -14,11 +14,15 @@ export const AuthProvider = ({ children }) => {
 
     // Auth changes management
     useEffect(() => {
-        // TEST
         const unsubscribe = onAuthStateChanged(auth, user => {
-            user
-                ? (setCurrentUser(user), setIsLogged(true), setLoading(false))
-                : (setCurrentUser(null), isLogged(false))
+            if (user) {
+                setCurrentUser(user)
+                setIsLogged(true)
+                setLoading(false)
+            } else {
+                setCurrentUser(null)
+                setIsLogged(false)
+            }
             setLoading(false)
         })
         return unsubscribe
@@ -53,10 +57,11 @@ export const AuthProvider = ({ children }) => {
 
             // Recover user data
             const loginRef = doc(fireStore, 'User', uid)
-            const data = (await getDoc(loginRef)).data()
-            
+            let data = (await getDoc(loginRef)).data()
+            data.token = token
+
             // Update state
-            setUserData({ data, token })
+            setUserData(data)
             setIsLogged(true)
         }
         catch (error) {
@@ -64,21 +69,21 @@ export const AuthProvider = ({ children }) => {
             console.error(error)
         }
     }
-    
+
     const login = async (email, password) => {
-        // TEST
         try {
             // Log in user
             await setPersistence(auth, browserSessionPersistence)
             const loginCredential = await signInWithEmailAndPassword(auth, email, password)
             const token = await loginCredential.user.getIdToken()
-            
+
             // Recover user data
-            const userRef = doc(fireStore, 'user', loginCredential.user.uid)
-            const data = (await getDoc(userRef)).data()
-            
+            const userRef = doc(fireStore, 'User', loginCredential.user.uid)
+            let data = (await getDoc(userRef)).data()
+            data.token = token
+
             // Update state
-            setUserData({ data, token })
+            setUserData(data)
             setIsLogged(true)
         }
         catch (error) {

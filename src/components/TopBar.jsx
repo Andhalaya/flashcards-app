@@ -4,13 +4,13 @@ import { useAuth } from '../context/AuthContext';
 
 
 export default function TopBar({ }) {
-  const { isLogged } = useAuth()
+  const { isLogged, logout, currentUser, userData } = useAuth()
   return (
     <div className='topBar'>
       <ul>
         <li>
           {isLogged
-            ? <Link to='/logout'>LOG OUT</Link>
+            ? <button onClick={logout}>LOG OUT</button>
             : <Link to='/login'>LOG IN</Link>
           }
         </li>

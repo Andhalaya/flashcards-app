@@ -1,6 +1,6 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import ThemeToggleButton from './ThemeToggleButton/ThemeToggleButton';
 
 
 export default function TopBar({ }) {
@@ -8,6 +8,7 @@ export default function TopBar({ }) {
   return (
     <div className='topBar'>
       <ul>
+        <li><ThemeToggleButton/></li>
         <li>
           {isLogged
             ? <Link to='/logout'>LOG OUT</Link>

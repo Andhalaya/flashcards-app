@@ -22,11 +22,19 @@ a{
   color: white;
 }
 
-
-
 body {
   margin: 0;
   display: flex;
   min-width: 320px;
   min-height: 100vh;
+}
+ 
+body.light {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+body.dark {
+  background-color: #242424;
+  color: #fff;
 }

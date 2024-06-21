@@ -4,7 +4,6 @@
   display: flex;
 }
 
-
 .content {
   padding: 20px;
   flex: 80%;
@@ -40,21 +39,6 @@
   flex-direction: column;
 }
 
-.topBar {
-  background-color: #acabab;
-  width: 100%;
-  top: 0;
-  height: 60px;
-  display: flex;
-  align-items: center;
-}
-
-.topBar ul {
-  margin: 0;
-  list-style: none;
-  display: flex;
-  gap: 20px;
-}
 
 .flip-card {
   width: 150px;

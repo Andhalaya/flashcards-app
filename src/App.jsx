@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext.jsx';
+import { ThemeProvider} from './context/ThemeContext.jsx';
 
 import './App.css';
 import Home from './pages/Home.jsx';
@@ -12,9 +13,11 @@ import LoginPage from './pages/Login/index.jsx';
 
 export default function App() {
   return (
-    <AuthProvider>
-      <AppContent />
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+       <AppContent />
+      </AuthProvider>
+    </ThemeProvider>
   )
 }
 

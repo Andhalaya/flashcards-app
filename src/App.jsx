@@ -3,9 +3,9 @@ import { AuthProvider } from './context/AuthContext.jsx';
 
 import './App.css';
 import Home from './pages/Home.jsx';
-import Hiragana from './pages/Hiragana';
+import Hiragana from './pages/hiragana';
 import TopBar from './components/TopBar';
-import MyCards from './pages/MyCards';
+import MyCards from './pages/myCards';
 import LoginPage from './pages/Login/index.jsx';
 
 

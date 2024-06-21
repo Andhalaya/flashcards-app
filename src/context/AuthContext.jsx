@@ -9,6 +9,7 @@ const AuthContext = createContext()
 export const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null)
     const [userData, setUserData] = useState(null)
+    const [isLogged, setIsLogged] = useState(false)
     const [loading, setLoading] = useState(true)
 
     // Auth changes management
@@ -16,8 +17,8 @@ export const AuthProvider = ({ children }) => {
         // TEST
         const unsubscribe = onAuthStateChanged(auth, user => {
             user
-                ? (setCurrentUser(user), setLoading(false))
-                : setCurrentUser(null)
+                ? (setCurrentUser(user), setIsLogged(true), setLoading(false))
+                : (setCurrentUser(null), isLogged(false))
             setLoading(false)
         })
         return unsubscribe
@@ -53,15 +54,17 @@ export const AuthProvider = ({ children }) => {
             // Recover user data
             const loginRef = doc(fireStore, 'User', uid)
             const data = (await getDoc(loginRef)).data()
+            
+            // Update state
             setUserData({ data, token })
-            print(userData)
+            setIsLogged(true)
         }
         catch (error) {
             console.log('Error: could not create new user')
             console.error(error)
         }
     }
-
+    
     const login = async (email, password) => {
         // TEST
         try {
@@ -69,11 +72,14 @@ export const AuthProvider = ({ children }) => {
             await setPersistence(auth, browserSessionPersistence)
             const loginCredential = await signInWithEmailAndPassword(auth, email, password)
             const token = await loginCredential.user.getIdToken()
-
+            
             // Recover user data
             const userRef = doc(fireStore, 'user', loginCredential.user.uid)
             const data = (await getDoc(userRef)).data()
+            
+            // Update state
             setUserData({ data, token })
+            setIsLogged(true)
         }
         catch (error) {
             console.log('Error: could not log in')
@@ -84,11 +90,12 @@ export const AuthProvider = ({ children }) => {
     const logout = async () => {
         // update 'My Cards' on fireStore
         setUserData(null)
+        setIsLogged(false)
         await signOut(auth)
     }
 
     return (
-        <AuthContext.Provider value={{ currentUser, userData, register, login, logout }}>
+        <AuthContext.Provider value={{ currentUser, userData, isLogged, register, login, logout }}>
             {children}
         </AuthContext.Provider>
     )

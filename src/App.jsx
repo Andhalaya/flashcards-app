@@ -6,10 +6,11 @@ import Home from './pages/Home.jsx';
 import Hiragana from './pages/Hiragana';
 import TopBar from './components/TopBar';
 import MyCards from './pages/MyCards';
-import Form from './pages/LoginPage/Form.jsx';
+import LoginPage from './pages/Login/index.jsx';
 
-export default function App(){
-  return(
+
+export default function App() {
+  return (
     <AuthProvider>
       <AppContent />
     </AuthProvider>
@@ -25,7 +26,7 @@ function AppContent() {
           <Route path='/' element={<Home />} />
           <Route path='/hiragana' element={<Hiragana />} />
           <Route path='/myCards' element={<MyCards />} />
-          <Route path='/login' element={<Form />} />
+          <Route path='/login' element={<LoginPage />} />
         </Routes>
       </div>
 

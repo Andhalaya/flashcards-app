@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useAuth } from '../../context/AuthContext'
+import './Login.css'
 
 // Revise
 const basicForm = {
@@ -18,23 +19,23 @@ export default function Form() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const { userName, email, password } = formData
-        
+
         // Testing OK
         await register(userName, email, password)
     }
 
     return (<>
-        <form onSubmit={handleSubmit}>
-            <label>User Name</label>
-            <input type='text' name='userName' value={formData.userName} onChange={handleChange} />
+            <form className='form' onSubmit={handleSubmit}>
+                <label>User Name</label>
+                <input type='text' name='userName' value={formData.userName} onChange={handleChange} />
 
-            <label>Email</label>
-            <input type='email' name='email' value={formData.email} onChange={handleChange} />
+                <label>Email</label>
+                <input type='email' name='email' value={formData.email} onChange={handleChange} />
 
-            <label>Password</label>
-            <input type='password' name='password' value={formData.password} onChange={handleChange} />
+                <label>Password</label>
+                <input type='password' name='password' value={formData.password} onChange={handleChange} />
 
-            <button type='submit'>Submit</button>
-        </form>
+                <button className='btn' type='submit'>Submit</button>
+            </form>
     </>)
 }

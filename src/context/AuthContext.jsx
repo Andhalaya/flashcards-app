@@ -1,15 +1,97 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, setPersistence, browserSessionPersistence, signOut } from 'firebase/auth';
+import { collection, doc, setDoc, getDoc, Timestamp } from 'firebase/firestore'
+
+import { auth, fireStore } from '../config/firebase';
 
 const AuthContext = createContext()
 
-export const AuthContextProvider = ({ children }) => {
-    const [user, setUser] = useState(null)
+export const AuthProvider = ({ children }) => {
+    const [currentUser, setCurrentUser] = useState(null)
+    const [userData, setUserData] = useState(null)
+    const [loading, setLoading] = useState(true)
+
+    // Auth changes management
+    useEffect(() => {
+        // TEST
+        const unsubscribe = onAuthStateChanged(auth, user => {
+            user
+                ? (setCurrentUser(user), setLoading(false))
+                : setCurrentUser(null)
+            setLoading(false)
+        })
+        return unsubscribe
+    }, [])
+
+
+    const register = async (username, email, password) => {
+        try {
+            // Create new user in Firebase Auth
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+            const uid = userCredential.user.uid
+
+            // Add user to Firestore database
+            const userRef = collection(fireStore, 'User')
+            await setDoc(doc(userRef, uid), {
+                uid,
+                username,
+                email,
+                registrationDate: Timestamp.fromDate(new Date()),
+                savedCards: {
+                    hiragana: [],
+                    katakana: [],
+                    kanji: []
+                },
+                quizScores: []
+            })
+
+            // Log in user
+            await setPersistence(auth, browserSessionPersistence)
+            const loginCredential = await signInWithEmailAndPassword(auth, email, password)
+            const token = await loginCredential.user.getIdToken()
+
+            // Recover user data
+            const loginRef = doc(fireStore, 'User', uid)
+            const data = (await getDoc(loginRef)).data()
+            setUserData({ data, token })
+            print(userData)
+        }
+        catch (error) {
+            console.log('Error: could not create new user')
+            console.error(error)
+        }
+    }
+
+    const login = async (email, password) => {
+        // TEST
+        try {
+            // Log in user
+            await setPersistence(auth, browserSessionPersistence)
+            const loginCredential = await signInWithEmailAndPassword(auth, email, password)
+            const token = await loginCredential.user.getIdToken()
+
+            // Recover user data
+            const userRef = doc(fireStore, 'user', loginCredential.user.uid)
+            const data = (await getDoc(userRef)).data()
+            setUserData({ data, token })
+        }
+        catch (error) {
+            console.log('Error: could not log in')
+            console.error(error)
+        }
+    }
+
+    const logout = async () => {
+        // update 'My Cards' on fireStore
+        setUserData(null)
+        await signOut(auth)
+    }
 
     return (
-        <AuthContext.Provider value={{ user, setUser }}>
+        <AuthContext.Provider value={{ currentUser, userData, register, login, logout }}>
             {children}
         </AuthContext.Provider>
     )
 }
 
-export const useUser = () => useContext(AuthContext)
+export const useAuth = () => useContext(AuthContext)

@@ -20,10 +20,15 @@
     position: relative;
 }
 
+.icon{
+    font-size: 20px;
+    color: black;
+}
+
 .topBar .dropdown-menu {
     position: absolute;
-    top: 100%;
-    right: 0;
+    max-width: 190px;
+    top: 62px;
     background: rgb(255, 255, 255);
     display: flex;
     flex-direction: column;
@@ -32,17 +37,24 @@
     z-index: 1;
 }
 
-.dropdown-menu a{
-    color: black;
-    padding: 10px 60px 10px 20px;
+.menu-item{
+    padding: 10px 70px 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.dropdown-menu a:hover{
-    background-color: #7c7c7c;
-    color: white;
+.menu-item a{
+    color: rgb(59, 59, 59);
 }
 
+.menu-item a:hover{
+    color: rgb(186, 95, 5);
+}
 
+.menu-item:hover{
+    background-color: #b7b7b7;
+}
 
 .user-info {
     display: flex;

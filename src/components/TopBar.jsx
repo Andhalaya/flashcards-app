@@ -8,7 +8,7 @@ export default function TopBar({ }) {
   return (
     <div className='topBar'>
       <ul>
-        <li><ThemeToggleButton/></li>
+        <li><ThemeToggleButton /></li>
         <li>
           {isLogged
             ? <button onClick={logout}>LOG OUT</button>
@@ -18,9 +18,11 @@ export default function TopBar({ }) {
         <li>
           <Link to='/'>HOME</Link>
         </li>
-        <li>
-          <Link to='/myCards'>MY CARDS</Link>
-        </li>
+        {isLogged && (
+          <li>
+            <Link to='/myCards'>MY CARDS</Link>
+          </li>
+        )}
         <li>
           <Link to='/hiragana'>HIRAGANA</Link>
         </li>

@@ -1,12 +1,27 @@
-import Hiragana from './pages/hiragana';
-import Home from './pages/Home';
-import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import TopBar from './components/TopBar';
+import { AuthProvider } from './context/AuthContext.jsx';
+import { ThemeProvider} from './context/ThemeContext.jsx';
+
+import './App.css';
+import Home from './pages/Home.jsx';
+import Hiragana from './pages/hiragana.jsx'
+import TopBar from './components/TopBar/TopBar.jsx';
 import MyCards from './pages/myCards';
+import LoginPage from './pages/Login/index.jsx';
 
 
-function App() {
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <AuthProvider>
+       <AppContent />
+      </AuthProvider>
+    </ThemeProvider>
+  )
+}
+
+function AppContent() {
   return (
     <BrowserRouter>
       <div className='app'>
@@ -15,11 +30,10 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/hiragana' element={<Hiragana />} />
           <Route path='/myCards' element={<MyCards />} />
+          <Route path='/login' element={<LoginPage />} />
         </Routes>
       </div>
 
     </BrowserRouter>
   );
 }
-
-export default App;

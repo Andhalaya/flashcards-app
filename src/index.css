@@ -13,20 +13,35 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.app{
+.app {
   width: 100vw;
 }
 
-a{
+a {
   text-decoration: none;
   color: white;
 }
 
-
+button {
+  cursor: pointer;
+  background-color: transparent;
+  border-color: transparent;
+  padding: 0px;
+}
 
 body {
   margin: 0;
   display: flex;
   min-width: 320px;
   min-height: 100vh;
+}
+ 
+body.light {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+body.dark {
+  background-color: #242424;
+  color: #fff;
 }

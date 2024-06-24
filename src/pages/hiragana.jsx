@@ -1,14 +1,13 @@
-import SideBar from '../components/SideBar';
+import SideBar from '../components/SideBar/SideBar.jsx';
 import Card from '../components/Card';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 export default function Hiragana() {
-
     const [cards, setCards] = useState([]);
     const [selectedGroup, setSelectedGroup] = useState('all');
     const [addedCards, setAddedCards] = useState([]);
-
+    
     useEffect(() => {
         fetchCards(selectedGroup);
         fetchSavedCards();

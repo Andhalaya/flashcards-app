@@ -1,0 +1,28 @@
+.topBar {
+    width: 100%;
+    top: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+.topBar.dark{
+    background-color: #1d1818be;
+    color:rgb(15, 15, 15);
+}
+
+.topBar.light{
+    background-color: #3a3939;
+    color: #441c1c;
+}
+
+  .TopBar-Enlaces ul{
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding-right: 50px;
+  }
+  .TopBar-Enlaces li:hover{
+    color:blue
+  }

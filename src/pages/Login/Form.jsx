@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext'
 import './Login.css'
 
@@ -10,9 +11,12 @@ const basicForm = {
 }
 
 export default function Form() {
+    const [pageType, setPageType] = useState('login')
+
     // MARÍA REMINDER: look up new FormData()
     const [formData, setFormData] = useState(basicForm)
-    const { register, login, isLogged, currentUser, userData } = useAuth()
+    const { register, login, userData, isLogged } = useAuth()
+    const navigate = useNavigate()
 
     const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value })
 
@@ -20,25 +24,43 @@ export default function Form() {
         e.preventDefault()
         const { userName, email, password } = formData
 
-        // Testing OK
-        // await register(userName, email, password)
+        pageType === 'login'
+            ? await login(email, password)
+            : await register(userName, email, password)
 
-        // Testing
-        await login(email, password)  
+        // Redirect to Home
+        navigate('/')
+        console.log(userData)
+        console.log(isLogged)
     }
 
+
     return (<>
-            <form className='form' onSubmit={handleSubmit}>
-                <label>User Name</label>
-                <input type='text' name='userName' value={formData.userName} onChange={handleChange} />
+        {pageType === 'login'
+            ? <h2>Log in</h2>
+            : <h2>Register</h2>
+        }
+        <form className='form' onSubmit={handleSubmit}>
+            {pageType === 'register' && (
+                <>
+                    <label>User Name</label>
+                    <input type='text' name='userName' value={formData.userName} onChange={handleChange} />
+                </>
+            )}
 
-                <label>Email</label>
-                <input type='email' name='email' value={formData.email} onChange={handleChange} />
+            <label>Email</label>
+            <input type='email' name='email' value={formData.email} onChange={handleChange} />
 
-                <label>Password</label>
-                <input type='password' name='password' value={formData.password} onChange={handleChange} />
+            <label>Password</label>
+            <input type='password' name='password' value={formData.password} onChange={handleChange} />
 
-                <button className='btn' type='submit'>Submit</button>
-            </form>
+            <button className='btn' type='submit'>Submit</button>
+        </form>
+        <p onClick={pageType === 'login' ? () => setPageType('register') : () => setPageType('login')}>
+            {pageType === 'login'
+                ? <>Don't have an account? Register <span className='changeForm'>here</span></>
+                : <>Already have an account? Login <span className='changeForm'>here</span></>
+            }
+        </p>
     </>)
 }

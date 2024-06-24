@@ -12,8 +12,8 @@
     flex-direction: column;
     gap: 6px;
     box-sizing: border-box;
-    width: 500px;
-    height: 300px;
+    width: 350px;
+    height: fit-content;
     padding: 10px 15px;
     background-color: #CAB8FF;
     font-weight: 500;
@@ -48,4 +48,9 @@
     font-weight: 500;
     font-size: 15px;
     cursor: pointer;
+}
+
+.changeForm {
+    font-weight: bold;
+    cursor: pointer
 }

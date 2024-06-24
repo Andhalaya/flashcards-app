@@ -5,7 +5,7 @@ import { ThemeProvider} from './context/ThemeContext.jsx';
 import './App.css';
 import Home from './pages/Home.jsx';
 import Hiragana from './pages/hiragana.jsx'
-import TopBar from './components/TopBar';
+import TopBar from './components/TopBar/TopBar.jsx';
 import MyCards from './pages/myCards';
 import LoginPage from './pages/Login/index.jsx';
 

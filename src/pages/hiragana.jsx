@@ -1,4 +1,4 @@
-import SideBar from '../components/SideBar';
+import SideBar from '../components/SideBar/SideBar.jsx';
 import Card from '../components/Card';
 import { useState, useEffect } from 'react';
 import axios from 'axios';

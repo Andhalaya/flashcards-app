@@ -30,10 +30,7 @@ export default function Form() {
 
         // Redirect to Home
         navigate('/')
-        console.log(userData)
-        console.log(isLogged)
     }
-
 
     return (<>
         {pageType === 'login'

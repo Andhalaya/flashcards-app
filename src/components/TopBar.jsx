@@ -2,11 +2,13 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import ThemeToggleButton from './ThemeToggleButton/ThemeToggleButton';
 
-
 export default function TopBar({ }) {
   const { isLogged, logout, currentUser, userData } = useAuth()
   return (
     <div className='topBar'>
+      {console.log(isLogged)}
+      {console.log(userData)}
+      {userData && (console.log(userData.uid))}
       <ul>
         <li><ThemeToggleButton /></li>
         <li>

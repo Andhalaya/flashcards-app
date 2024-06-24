@@ -85,10 +85,6 @@ export const AuthProvider = ({ children }) => {
             // Update state
             setUserData(data)
             setIsLogged(true)
-
-            // NO HACE UPDATE :(
-            console.log(userData)
-            console.log(isLogged)
         }
         catch (error) {
             console.log('Error: could not log in')
@@ -98,8 +94,8 @@ export const AuthProvider = ({ children }) => {
 
     const logout = async () => {
         // update 'My Cards' on fireStore
-        // const userRef = doc(fireStore, 'User', userData.uid)
-        // await updateDoc(userRef, { savedCards: [userData.savedCards] })
+        const userRef = doc(fireStore, 'User', userData.uid)
+        await updateDoc(userRef, { savedCards: [userData.savedCards] })
 
         // Logout
         setUserData(null)

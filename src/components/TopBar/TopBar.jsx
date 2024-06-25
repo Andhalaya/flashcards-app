@@ -30,6 +30,7 @@ export default function TopBar({ }) {
         <li>
           <Link to='/myCards'>MY CARDS</Link>
         </li>
+
         <li>
           <Link to='/hiragana'>HIRAGANA</Link>
         </li>
@@ -40,6 +41,6 @@ export default function TopBar({ }) {
           <Link to='/kanji'>KANJI</Link>
         </li>
       </ul>
-    </div>
+    </div
   );
 }

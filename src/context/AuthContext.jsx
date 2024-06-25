@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, setPersistence, browserSessionPersistence, signOut } from 'firebase/auth';
-import { collection, doc, setDoc, getDoc, Timestamp } from 'firebase/firestore'
+import { collection, doc, setDoc, getDoc, updateDoc, Timestamp } from 'firebase/firestore'
 
 import { auth, fireStore } from '../config/firebase';
 
@@ -94,6 +94,10 @@ export const AuthProvider = ({ children }) => {
 
     const logout = async () => {
         // update 'My Cards' on fireStore
+        const userRef = doc(fireStore, 'User', userData.uid)
+        await updateDoc(userRef, { savedCards: [userData.savedCards] })
+        
+        // Logout
         setUserData(null)
         setIsLogged(false)
         await signOut(auth)

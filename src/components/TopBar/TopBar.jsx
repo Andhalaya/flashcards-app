@@ -1,35 +1,36 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { useTheme } from '../../context/ThemeContext';
-import ThemeToggleButton from '../ThemeToggleButton/ThemeToggleButton';
-import './TopBar.css'
-
+import DropdownMenu from '../DropdownMenu';
+import './topBar.css';
+import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 
 export default function TopBar({ }) {
-  const { isLogged, logout, currentUser, userData } = useAuth()
-  const {theme} = useTheme()
-
+  const { isLogged, logout, currentUser, userData } = useAuth();
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+  
+  const toggleDropdown = () => {
+    setDropdownVisible(!dropdownVisible);
+  };
+ 
   return (
-    <>
-    <div className={`topBar ${theme}`}>
-      <div className='desplegable'>
-        <ThemeToggleButton />
-          {isLogged
-            ? <button onClick={logout}>LOG OUT</button>
-            : <Link to='/login'>LOG IN</Link>
-          }
-         </div> 
-         <div className='TopBar-Enlaces'>
-        <ul>
+    <div className='topBar'>
+      <div className='user-info'>
+        <MdOutlineKeyboardArrowDown className='arrow-icon' onClick={toggleDropdown} />
+        <div className='logo'></div>
+        <h3>User</h3>
+        {dropdownVisible && (
+          <DropdownMenu logout={logout}/>
+        )}
+      </div>
+      <ul>
         <li>
           <Link to='/'>HOME</Link>
         </li>
-        {isLogged && (
-          <li>
-            <Link to='/myCards'>MY CARDS</Link>
-          </li>
-        )}
-      
+        <li>
+          <Link to='/myCards'>MY CARDS</Link>
+        </li>
+
         <li>
           <Link to='/hiragana'>HIRAGANA</Link>
         </li>
@@ -40,8 +41,6 @@ export default function TopBar({ }) {
           <Link to='/kanji'>KANJI</Link>
         </li>
       </ul>
-      </div>
-    </div>
-    </>
+    </div
   );
 }

@@ -1,0 +1,81 @@
+.topBar {
+    background-color: #acabab;
+    width: 100%;
+    top: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 20px;
+}
+
+.topBar ul {
+    margin: 0;
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.topBar .user-info {
+    position: relative;
+}
+
+.icon{
+    font-size: 20px;
+    color: black;
+}
+
+.topBar .dropdown-menu {
+    position: absolute;
+    max-width: 190px;
+    top: 62px;
+    background: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.menu-item{
+    padding: 10px 70px 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.menu-item a{
+    color: rgb(59, 59, 59);
+}
+
+.menu-item a:hover{
+    color: rgb(186, 95, 5);
+}
+
+.menu-item:hover{
+    background-color: #b7b7b7;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.arrow-icon {
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.arrow-icon:hover {
+    background-color: #7c7c7c;
+    border-radius: 30px;
+}
+
+.logo {
+    background-image: url('../../assets/logo.jpg');
+    width: 40px;
+    height: 40px;
+    background-size: cover;
+    border-radius: 30px;
+}

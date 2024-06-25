@@ -18,12 +18,14 @@ export default function Hiragana() {
         try {
             if (group === 'all') {
                 const res = await axios.get('http://localhost:8080/hiragana')
-                setCards(res.data);
+                console.log(res.data.rows)
+                setCards(res.data.rows);
             } else {
                 const res = await axios.get('http://localhost:8080/hiragana/group', {
                     params: { group }
                 });
-                setCards(res.data);
+                console.log(res.data.rows)
+                setCards(res.data.rows);
             }
 
         } catch (error) {
@@ -34,7 +36,6 @@ export default function Hiragana() {
     const fetchSavedCards = async () => {
         try {
             const res = await axios.get('http://localhost:8080/myCards');
-            console.log(res.data)
             setAddedCards(res.data.map(card => card.symbol)); 
         } catch (error) {
             console.error('Error fetching saved flashcards:', error);
@@ -71,8 +72,8 @@ export default function Hiragana() {
                         {cards.map((card, index) => (
                             <Card
                                 key={index}
-                                symbol={card.kata}
-                                meaning={card.romaji}
+                                symbol={card[1]}
+                                meaning={card[2]}
                                 isAdded={addedCards.includes(card.kata)}
                                 onToggleAdd={() => handleAddCard(card.kata, card.romaji)}
                             />

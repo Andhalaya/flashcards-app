@@ -41,6 +41,6 @@ export default function TopBar({ }) {
           <Link to='/kanji'>KANJI</Link>
         </li>
       </ul>
-    </div
+    </div>
   );
 }

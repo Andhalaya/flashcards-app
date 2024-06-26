@@ -30,15 +30,6 @@
   flex-direction: column;
 }
 
-.sideBar {
-  background-color: #4d4d4d;
-  bottom: 0;
-  padding: 20px;
-  flex: 20%;
-  display: flex;
-  flex-direction: column;
-}
-
 
 .flip-card {
   width: 150px;

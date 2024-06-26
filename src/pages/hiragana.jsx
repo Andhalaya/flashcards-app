@@ -21,7 +21,7 @@ export default function Hiragana() {
                 console.log(res.data.rows)
                 setCards(res.data.rows);
             } else {
-                const res = await axios.get('http://localhost:8080/hiragana/group', {
+                const res = await axios.get('https://flashcards-server-bnie.onrender.com/hiragana/group', {
                     params: { group }
                 });
                 console.log(res.data.rows)

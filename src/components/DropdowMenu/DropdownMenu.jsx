@@ -1,18 +1,23 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import ThemeToggleButton from './ThemeToggleButton/ThemeToggleButton';
-import * as Icons from "../utils/icons";
+import { useAuth } from '../../context/AuthContext';
+import ThemeToggleButton from '../ThemeToggleButton/ThemeToggleButton';
+import * as Icons from "../../utils/icons";
+import './DropdowMenu.css'
 
 export default function DropdownMenu() {
     const { isLogged, logout, currentUser, userData } = useAuth();
     return (
         <div className='dropdown-menu'>
             {isLogged
-                ? <div className='menu-item' onClick={logout}>
+                ? <div><div className='menu-item' onClick={logout}>
                     <Icons.MdLogout className='icon'/>
                     <p>Log Out</p>
-                </div>
+                </div>  
+                <div className='menu-item'>
+            <Icons.FaRegUser className='icon' />
+                <Link to='/profile'>Profile</Link>
+            </div>
+            </div>
                 : <div className='menu-item'>
                     <Icons.MdLogout className='icon'/>
                     <Link to='/login'>
@@ -21,10 +26,7 @@ export default function DropdownMenu() {
                 </div>
 
             }
-            <div className='menu-item'>
-            <Icons.FaRegUser className='icon' />
-                <Link to='/profile'>Profile</Link>
-            </div>
+          
             <div className='menu-item'>
             <Icons.MdOutlineSettings className='icon'/>
                 <Link to='/settings'>Settings</Link>

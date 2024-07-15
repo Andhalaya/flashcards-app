@@ -1,0 +1,18 @@
+.menu-item{
+    padding: 10px 70px 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.menu-item a{
+    color: rgb(59, 59, 59);
+}
+
+.menu-item a:hover{
+    color: rgb(186, 95, 5);
+}
+
+.menu-item:hover{
+    background-color: #b7b7b7;
+}

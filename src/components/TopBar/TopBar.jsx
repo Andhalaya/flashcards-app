@@ -1,47 +1,51 @@
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
-import ThemeToggleButton from '../ThemeToggleButton/ThemeToggleButton';
-import './TopBar.css'
+import DropdownMenu from '../DropdowMenu/DropdownMenu';
+import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+import './topBar.css';
 
+export default function TopBar() {
+  const { isLogged, logout, currentUser, userData } = useAuth();
+  const { theme } = useTheme();
+  const [dropdownVisible, setDropdownVisible] = useState(false);
 
-export default function TopBar({ }) {
-  const { isLogged, logout, currentUser, userData } = useAuth()
-  const {theme} = useTheme()
+  const toggleDropdown = () => {
+    setDropdownVisible(!dropdownVisible);
+  };
 
   return (
-    <>
-    <div className={`topBar ${theme}`}>
-      <div className='desplegable'>
-        <ThemeToggleButton />
-          {isLogged
-            ? <button onClick={logout}>LOG OUT</button>
-            : <Link to='/login'>LOG IN</Link>
-          }
-         </div> 
-         <div className='TopBar-Enlaces'>
-        <ul>
-        <li>
-          <Link to='/'>HOME</Link>
-        </li>
-        {isLogged && (
-          <li>
-            <Link to='/myCards'>MY CARDS</Link>
-          </li>
+    <div className='topBar'>
+      <div className='user-info'>
+        <MdOutlineKeyboardArrowDown className='arrow-icon' onClick={toggleDropdown} />
+        <div className='logo'></div>
+        <h3>User</h3>
+        {dropdownVisible && (
+          <DropdownMenu logout={logout} />
         )}
-      
-        <li>
-          <Link to='/hiragana'>HIRAGANA</Link>
-        </li>
-        <li>
-          <Link to='/katakana'>KATAKANA</Link>
-        </li>
-        <li>
-          <Link to='/kanji'>KANJI</Link>
-        </li>
-      </ul>
+      </div>
+      <div className='TopBar-Enlaces'>
+        <ul>
+          <li className={`link-${theme}`}>
+            <Link to='/'>HOME</Link>
+          </li>
+          {currentUser && (
+            <li className={`link-${theme}`}>
+              <Link to='/myCards'>MY CARDS</Link>
+            </li>
+          )}
+          <li className={`link-${theme}`}>
+            <Link to='/hiragana'>HIRAGANA</Link>
+          </li>
+          <li className={`link-${theme}`}>
+            <Link to='/katakana'>KATAKANA</Link>
+          </li>
+          <li className={`link-${theme}`}>
+            <Link to='/kanji'>KANJI</Link>
+          </li>
+        </ul>
       </div>
     </div>
-    </>
   );
 }

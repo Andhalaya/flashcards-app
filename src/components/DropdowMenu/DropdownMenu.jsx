@@ -8,14 +8,14 @@ export default function DropdownMenu() {
     const { isLogged, logout, currentUser, userData } = useAuth();
     return (
         <div className='dropdown-menu'>
-            {isLogged
+            {userData 
                 ? <div><div className='menu-item' onClick={logout}>
                     <Icons.MdLogout className='icon'/>
                     <p>Log Out</p>
                 </div>  
                 <div className='menu-item'>
             <Icons.FaRegUser className='icon' />
-                <Link to='/profile'>Profile</Link>
+                <Link to='/Myprofile'>Profile</Link>
             </div>
             </div>
                 : <div className='menu-item'>

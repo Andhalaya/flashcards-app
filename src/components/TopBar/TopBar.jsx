@@ -20,7 +20,14 @@ export default function TopBar() {
       <div className='user-info'>
         <MdOutlineKeyboardArrowDown className='arrow-icon' onClick={toggleDropdown} />
         <div className='logo'></div>
-        <h3>User</h3>
+        {userData ? (
+  <>
+    <h3>{userData.username}</h3>
+  </>
+) : (
+  <h3>User</h3>
+)}
+
         {dropdownVisible && (
           <DropdownMenu logout={logout} />
         )}
@@ -30,7 +37,7 @@ export default function TopBar() {
           <li className={`link-${theme}`}>
             <Link to='/'>HOME</Link>
           </li>
-          {currentUser && (
+          {userData && (
             <li className={`link-${theme}`}>
               <Link to='/myCards'>MY CARDS</Link>
             </li>

@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, setPersistence, browserSessionPersistence, signOut } from 'firebase/auth';
 import { collection, doc, setDoc, getDoc, updateDoc, Timestamp } from 'firebase/firestore'
-
+import { useNavigate } from "react-router-dom";
 import { auth, fireStore } from '../config/firebase';
 
 const AuthContext = createContext()
@@ -11,6 +11,7 @@ export const AuthProvider = ({ children }) => {
     const [userData, setUserData] = useState(null)
     const [isLogged, setIsLogged] = useState(false)
     const [loading, setLoading] = useState(true)
+    const navigate = useNavigate();
 
     // Auth changes management
     useEffect(() => {
@@ -85,6 +86,7 @@ export const AuthProvider = ({ children }) => {
             // Update state
             setUserData(data)
             setIsLogged(true)
+            navigate("/session-timed-out");
         }
         catch (error) {
             console.log('Error: could not log in')

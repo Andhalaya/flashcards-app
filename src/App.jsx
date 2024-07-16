@@ -7,7 +7,7 @@ import Home from './pages/Home.jsx';
 import Hiragana from './pages/hiragana.jsx';
 import TopBar from './components/TopBar/TopBar.jsx';
 import MyCards from './pages/myCards';
-import LoginPage from './pages/Login/index.jsx';
+import LoginPage from './pages/Login/LoginPage.jsx';
 import MyProfile from './pages/Myprofile.jsx'
 
 export default function App() {

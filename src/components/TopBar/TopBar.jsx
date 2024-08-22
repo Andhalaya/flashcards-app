@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
@@ -7,7 +7,7 @@ import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import './topBar.css';
 
 export default function TopBar() {
-  const { isLogged, logout, currentUser, userData } = useAuth();
+  const { logout,  userData } = useAuth();
   const { theme } = useTheme();
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
